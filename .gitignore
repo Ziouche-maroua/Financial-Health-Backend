@@ -15,6 +15,8 @@ firebase-debug.log
 .firebaserc
 *.fcm
 
+# Ignore the Firebase service account key
+config/firebaseConfig.json
 # Logs
 logs/
 *.log
