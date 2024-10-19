@@ -12,7 +12,12 @@ dotenv.config(); // Load environment variables from .env file
 const app: Application = express();
 
 // Middleware for CORS (Cross-Origin Resource Sharing)
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow only your frontend origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods if needed
+    credentials: true, // Allow cookies or authorization headers (if necessary)
+}));
+
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
