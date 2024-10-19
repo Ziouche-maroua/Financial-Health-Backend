@@ -3,6 +3,7 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes'; 
 import transactionRoutes from './routes/transactionRoutes';
 import budgetRoutes from './routes/budgetRoutes';
+import reportRoutes from './routes/reportRoutes';
 import {verifyToken} from './middlewares/authMiddleware'; // (optional) for global route protection
 import dotenv from 'dotenv'; // For loading environment variables
 
@@ -26,6 +27,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api', userRoutes);
 app.use('/api', transactionRoutes);
 app.use('/api', budgetRoutes);
+app.use('/api', reportRoutes);
 
 
 // Global error handler
