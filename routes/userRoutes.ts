@@ -1,21 +1,32 @@
 import { Router } from 'express';
-import { loginUser, signupUser, getUser, updateUser, deleteUser } from '../controllers/userController';
-import { verifyToken } from '../middlewares/authMiddleware';
+import { signupUser, loginUser, getUser, updateUser, deleteUser } from '../controllers/userController';
+import { Request, Response } from 'express';
 
 const router = Router();
 
-// Route to create a user (public)
-router.post('/signup', signupUser);
+// Signup Route
+router.post('/signup', async (req: Request, res: Response) => {
+  await signupUser(req, res);
+});
 
-router.post('/login', loginUser);
+// Login Route
+router.post('/login', async (req: Request, res: Response) => {
+  await loginUser(req, res);
+});
 
-// Route to get user by ID (protected)
-router.get('/:id', verifyToken, getUser);
+// Get User Route
+router.get('/:id', async (req: Request, res: Response) => {
+  await getUser(req, res);
+});
 
-// Route to update user (protected)
-router.put('/:id', verifyToken, updateUser);
+// Update User Route
+router.put('/:id', async (req: Request, res: Response) => {
+  await updateUser(req, res);
+});
 
-// Route to delete user (protected)
-router.delete('/:id', verifyToken, deleteUser);
+// Delete User Route
+router.delete('/:id', async (req: Request, res: Response) => {
+  await deleteUser(req, res);
+});
 
 export default router;
