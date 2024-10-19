@@ -20,8 +20,11 @@
     "@firebasegen/default-connector": "file:dataconnect-generated/js/default-connector",
     "connect-cors": "^0.5.6",
     "cors": "^2.8.5",
+    "csv-writer": "^1.6.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "firebase-admin": "^12.6.0"
+    "firebase-admin": "^12.6.0",
+    "pdfkit": "^0.15.0",
+    "xlsx": "^0.18.5"
   }
 }

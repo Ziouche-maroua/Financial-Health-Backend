@@ -1,4 +1,5 @@
 import { db } from '../config/firebaseConfig';
+import admin from 'firebase-admin';
 
 // Add data to a Firestore collection
 // Modify addData to accept an optional documentId parameter
@@ -64,5 +65,27 @@ export const deleteData = async (collection: string, docId: string) => {
             throw new Error(`Error deleting data: ${error.message}`);
         }
         throw new Error('Error deleting data: An unknown error occurred');
+    }
+};
+
+// Function to get user from Firebase by token
+export const getUserFromFirebase = async (token: string) => {
+    try {
+        // Verify the token with Firebase Admin SDK
+        const decodedToken = await admin.auth().verifyIdToken(token);
+        const uid = decodedToken.uid; // Extract the user ID from the decoded token
+
+        // Fetch user data from Firestore
+        const userDoc = await db.collection('users').doc(uid).get(); // Assuming users are stored in a 'users' collection
+        if (!userDoc.exists) {
+            throw new Error('User not found');
+        }
+
+        return {
+            uid: userDoc.id,
+            ...userDoc.data(), // Spread the user data
+        };
+    } catch (error:any) {
+        throw new Error(`Error fetching user: ${error.message}`);
     }
 };

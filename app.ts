@@ -1,7 +1,9 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import userRoutes from './routes/userRoutes'; // Import your user routes
-import { verifyToken } from './middlewares/authMiddleware'; // (optional) for global route protection
+import userRoutes from './routes/userRoutes'; 
+import transactionRoutes from './routes/transactionRoutes';
+import budgetRoutes from './routes/budgetRoutes';
+import {verifyToken} from './middlewares/authMiddleware'; // (optional) for global route protection
 import dotenv from 'dotenv'; // For loading environment variables
 
 dotenv.config(); // Load environment variables from .env file
@@ -13,14 +15,18 @@ app.use(cors());
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
+app.use(verifyToken);
 
 // Route for health check (optional)
 app.get('/', (req: Request, res: Response) => {
     res.send('API is running...');
 });
 
-// User routes (use prefix `/api/users`)
-app.use('/api/users', userRoutes);
+// Routes
+app.use('/api', userRoutes);
+app.use('/api', transactionRoutes);
+app.use('/api', budgetRoutes);
+
 
 // Global error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

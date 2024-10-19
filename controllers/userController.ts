@@ -2,21 +2,21 @@ import { Request, Response } from 'express';
 import { addData, getData, updateData, deleteData } from '../data/firebaseData';
 import { auth } from '../config/firebaseConfig'; // Import Firebase Auth
 
+
 // User Interface
 interface User {
     id: string;
     email: string;
+    password:string;
     name?: string;
     createdAt: Date;
     photoURL?: string;
-    lastLogin?: Date;
     role?: string;
 }
 
-
 // Function to handle user signup with email and password
 export const signupUser = async (req: Request, res: Response) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role }: User = req.body;
 
     // Validate input
     if (!name || !email || !password || !role) {
