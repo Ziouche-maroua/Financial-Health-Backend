@@ -16,7 +16,7 @@ firebase-debug.log
 *.fcm
 
 # Ignore the Firebase service account key
-config/firebaseConfig.json
+mars-financial-health-firebase-adminsdk-pbd9y-24ff7d2e8b.json
 # Logs
 logs/
 *.log

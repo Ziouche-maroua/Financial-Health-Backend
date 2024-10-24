@@ -43,7 +43,7 @@ export const generatePDFReport = async (req: Request, res: Response) => {
 
         doc.pipe(res);
         doc.end();
-    } catch (error) {
+    } catch (error :any) {
         res.status(500).send({ message: error.message });
     }
 };
@@ -65,7 +65,7 @@ export const generateExcelReport = async (req: Request, res: Response) => {
 
         const buffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
         res.send(buffer);
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).send({ message: error.message });
     }
 };
@@ -99,7 +99,7 @@ export const generateCSVReport = async (req: Request, res: Response) => {
                 fs.unlinkSync(`./tmp/report-${userId}.csv`);
             }
         });
-    } catch (error) {
+    } catch (error :any) {
         res.status(500).send({ message: error.message });
     }
 };
